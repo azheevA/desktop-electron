@@ -1,0 +1,11 @@
+[test]
+pathIgnorePatterns = ["tests/e2e/**"]
+coverageReporter = ["text", "lcov"]
+coverageDir = "coverage"
+coveragePathIgnorePatterns = [
+  "**/*.test.ts",
+  "**/*.test.tsx",
+  "**/*.test.js",
+  "**/*.spec.cjs",
+  "playwright.config.cjs",
+]

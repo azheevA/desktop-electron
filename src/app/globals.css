@@ -1,0 +1,291 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html,
+body {
+  min-height: 100%;
+  background: #080b12;
+}
+
+body {
+  margin: 0;
+  color: #edf2f7;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+::selection {
+  color: #10170e;
+  background: #a5f36b;
+}
+
+.electron-drag {
+  -webkit-app-region: drag;
+}
+
+.electron-no-drag {
+  -webkit-app-region: no-drag;
+}
+
+/* Electron: фиксируем внешнюю оболочку, прокручивается только область сайта. */
+html.electron-app,
+html.electron-app body {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+}
+
+html.electron-app body {
+  display: flex;
+  flex-direction: column;
+}
+
+html.electron-app .electron-drag {
+  flex: 0 0 40px;
+}
+
+html.electron-app .app-shell {
+  flex: 1 1 auto;
+  width: 100%;
+  height: calc(100dvh - 40px);
+  min-height: 0;
+  overflow: hidden;
+}
+
+html.electron-app .app-shell > section {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+}
+
+html.electron-app .app-shell > section > header {
+  flex: 0 0 clamp(68px, 7vh, 86px);
+}
+
+html.electron-app .sidebar-shell {
+  flex: 0 0 auto;
+  height: 100%;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+html.electron-app .content-scroll-area {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+}
+
+html.electron-app .content-scroll-area::-webkit-scrollbar,
+html.electron-app .sidebar-shell::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+}
+
+html.electron-app .content-scroll-area::-webkit-scrollbar-track,
+html.electron-app .sidebar-shell::-webkit-scrollbar-track {
+  background: #080b12;
+}
+
+html.electron-app .content-scroll-area::-webkit-scrollbar-thumb,
+html.electron-app .sidebar-shell::-webkit-scrollbar-thumb {
+  border: 2px solid #080b12;
+  border-radius: 999px;
+  background: #293645;
+}
+
+html.electron-app .content-scroll-area::-webkit-scrollbar-thumb:hover,
+html.electron-app .sidebar-shell::-webkit-scrollbar-thumb:hover {
+  background: #465766;
+}
+
+@media (max-width: 620px) {
+  html.electron-app .app-shell > section > header {
+    flex-basis: 62px;
+  }
+}
+
+/* Fluid desktop layout: the workspace expands with the actual app window. */
+.content-scroll-area {
+  width: 100%;
+  max-width: none;
+  min-height: calc(100vh - 76px);
+  display: flex;
+  flex-direction: column;
+  padding-inline: clamp(22px, 3vw, 72px);
+  padding-top: clamp(28px, 3.5vh, 48px);
+  padding-bottom: clamp(22px, 3vh, 42px);
+  container-name: workspace;
+  container-type: inline-size;
+}
+
+.dashboard-panel {
+  min-width: 0;
+}
+
+.dashboard-stat-card {
+  min-width: 0;
+}
+
+.dashboard-project-card {
+  min-width: 0;
+}
+
+.dashboard-task-row {
+  min-width: 0;
+}
+
+.sidebar-shell {
+  width: clamp(232px, 14vw, 292px);
+  padding-inline: clamp(14px, 1vw, 22px);
+}
+
+@media (min-width: 1600px) {
+  .dashboard-stats-grid,
+  .dashboard-projects-grid {
+    gap: clamp(16px, 1vw, 24px);
+  }
+
+  .dashboard-analytics-grid {
+    gap: clamp(18px, 1.15vw, 28px);
+  }
+}
+
+@media (min-width: 1600px) and (min-height: 900px) {
+  .dashboard-chart-area {
+    height: clamp(210px, 23vh, 320px);
+  }
+
+  .dashboard-goal-ring {
+    width: clamp(150px, 9vw, 184px);
+    height: clamp(150px, 9vw, 184px);
+  }
+}
+
+@media (min-width: 2200px) {
+  .content-scroll-area {
+    padding-inline: clamp(64px, 3.6vw, 112px);
+  }
+
+  .dashboard-stat-card,
+  .dashboard-project-card,
+  .dashboard-panel {
+    border-radius: 14px;
+  }
+}
+
+@media (max-width: 1150px) {
+  .content-scroll-area {
+    padding-inline: 28px;
+  }
+}
+
+@media (max-width: 850px) {
+  .sidebar-shell {
+    width: 68px;
+    padding-inline: 9px;
+  }
+}
+
+@media (max-width: 620px) {
+  .content-scroll-area {
+    min-height: calc(100vh - 62px);
+    padding: 27px 15px 22px;
+  }
+
+  .sidebar-shell {
+    width: 68px;
+  }
+}
+
+@media (min-height: 980px) and (min-width: 1151px) {
+  .dashboard-stat-card {
+    min-height: clamp(128px, 12vh, 176px);
+  }
+
+  .dashboard-task-row {
+    min-height: clamp(54px, 6vh, 74px);
+  }
+}
+
+html.electron-app .content-scroll-area {
+  flex: 1 1 auto;
+  width: 100%;
+  max-width: none;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+}
+
+@media (max-width: 620px) {
+  html.electron-app .app-shell > section > header {
+    flex-basis: 62px;
+  }
+}
+
+/* Typography follows the window width instead of staying at compact laptop sizes. */
+.dashboard-panel h2,
+.section-heading h2 {
+  font-size: clamp(14px, 0.95vw, 18px);
+}
+
+.dashboard-summary-value {
+  font-size: clamp(23px, 1.65vw, 34px);
+}
+
+.dashboard-project-card h3 {
+  font-size: clamp(12px, 0.9vw, 16px);
+}
+
+.dashboard-project-category {
+  font-size: clamp(9px, 0.68vw, 12px);
+}
+
+.dashboard-task-row {
+  font-size: clamp(9px, 0.68vw, 12px);
+}
+
+/* FSD TODO workspace: общий вид UI kit и экрана задач. */
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: none;
+}
+
+.task-manager-scroll {
+  min-width: 0;
+}
+
+[data-radix-popper-content-wrapper] {
+  z-index: 110 !important;
+}
+
+::-webkit-calendar-picker-indicator {
+  filter: invert(0.75);
+  cursor: pointer;
+}
